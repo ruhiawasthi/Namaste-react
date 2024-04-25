@@ -1,5 +1,8 @@
-const heading1 = React.createElement("h1", { id: "title" }, "Heading1");
-const heading2 = React.createElement("h2", { id: "title" }, "Heading2");
+import React from "react";
+import ReactDOM  from "react-dom";
+// always use keys if you have more then one child
+const heading1 = React.createElement("h1", { id: "title", key:"h1" }, "Heading1");
+const heading2 = React.createElement("h2", { id: "title" , key:"h2"}, "Heading2");
 const container = React.createElement("div", { id: "container" }, [
   heading1,
   heading2,

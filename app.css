@@ -1,0 +1,12 @@
+.header { 
+    display: flex !important;; 
+    justify-content: space-between;
+}
+
+.nav-items>ul{
+    list-style-type: none;
+}
+
+.nav-items>ul>li{
+    padding: 10px;
+}

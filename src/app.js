@@ -12,7 +12,7 @@ Header:
   4) cart
 
 Body:
-   1)search Bar
+   1)Search Bar
    2)RestaurantList:
         Resturant card: 
         1) Image

@@ -1,12 +1,9 @@
-const Shimmer=()=>{
-{/* <h1>Shimmer UI Loading.....</h1> */}
-
-<div className="shimmer">
-    <div className="shimmerCard">
-        <h1></h1>
-    </div>
-</div>
-
-}
-
+const Shimmer = () => {
+  return (
+    // <div className="restaurant-list">
+    //   <div className="shimmer-card"></div>
+    // </div>
+    <h1>This is Shimmer ui</h1>
+  );
+};
 export default Shimmer;

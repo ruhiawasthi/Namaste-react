@@ -1,5 +1,8 @@
 // import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+// import Contact from "./Contact";
+// import About from "./About";
 
 const Title = () => {
   return (
@@ -20,16 +23,24 @@ const Header = () => {
       <Title />
       <div className="nav-items">
         <ul>
-          <li>Menu</li>
-          <li>About</li>
-          <li>Contact</li>
+          <Link to="/">
+            <li>Home</li>
+          </Link>
+
+          <Link to="/about">
+            <li>About</li>
+          </Link>
+          <Link to="/contact">
+            <li>Contact</li>
+          </Link>
+
           <li>Cart</li>
         </ul>
       </div>
       {check ? (
         <button onClick={() => setCheck(false)}>Login</button>
       ) : (
-        <button onClick={() => setCheck(true)}>Logiout</button>
+        <button onClick={() => setCheck(true)}>Logout</button>
       )}
     </div>
   );

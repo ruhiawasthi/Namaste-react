@@ -2,19 +2,19 @@ import { restaurantList } from "../contants";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const FilterData = (searchText, restaurants) => {
-const val = restaurants.filter((restaurant) =>
+  const val = restaurants.filter((restaurant) =>
     restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
   );
-  console.log("val", val)
+  console.log("val", val);
   return val;
 };
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
-  const [filteredRestaurants, setfilteredRestaurants]= useState([]);
+  const [filteredRestaurants, setfilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
-
 
   useEffect(() => {
     getrestaurant();
@@ -26,17 +26,25 @@ const Body = () => {
     );
     const json = await data.json();
     console.log(json);
-    setAllRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setfilteredRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setAllRestaurants(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setfilteredRestaurants(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   }
   console.log("render");
-  console.log("allRestaurants",allRestaurants);
-  console.log("filteredRestaurants",filteredRestaurants);
- 
-//early return , when you have no resturant don't return anything: this is you can avoid rendering componenet
-if(!allRestaurants) return null;
+  console.log("allRestaurants", allRestaurants);
+  console.log("filteredRestaurants", filteredRestaurants);
 
-  return (allRestaurants === 0)? <Shimmer/>: (
+  //early return , when you have no resturant don't return anything: this is you can avoid rendering componenet
+  // if(!allRestaurants) return null;
+  // if(filteredRestaurants?.length===0)
+  //   return <h1> No record matching</h1>
+
+  return allRestaurants?.length === 0 ? (
+    <Shimmer />
+  ) : (
     <>
       <div>
         <input
@@ -60,9 +68,12 @@ if(!allRestaurants) return null;
         </button>
       </div>
       <div className="restaurant-list">
-        
-        {filteredRestaurants.map((resturant ) => {
-          return <RestaurantCard {...resturant.info} key={resturant?.info?.id} />;
+        {filteredRestaurants.map((resturant) => {
+          return (
+            <Link to={"/restaurant/"+resturant?.info?.id}  key={resturant?.info?.id}>
+              <RestaurantCard {...resturant.info} />
+            </Link>
+          );
         })}
       </div>
     </>
@@ -70,8 +81,6 @@ if(!allRestaurants) return null;
 };
 
 export default Body;
-
-
 
 // import { restaurantList } from "../contants";
 // import RestaurantCard from "./RestaurantCard";

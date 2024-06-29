@@ -17,3 +17,16 @@
     margin:10px ;
     border: 1px solid black ;
 }
+
+.restaurant-list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shimmer-card{
+    width:200px;
+    height: 200px;
+    background: rgb(124, 25, 63);
+    margin: 10px;
+    /* border: 1px solid black ; */
+}

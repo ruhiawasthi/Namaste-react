@@ -34,3 +34,9 @@
     flex-wrap: wrap;
     width:auto
 }
+
+.user-class{
+    border: solid black 1px;
+   padding:10px; 
+
+}

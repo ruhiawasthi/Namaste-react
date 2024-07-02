@@ -1,9 +1,23 @@
 // import React from "react";
-import { useState } from "react";
+import { lazy, useState } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStataus from "../utils/useOnlineStatus";
+
 // import Contact from "./Contact";
 // import About from "./About";
+// import Grocery from "./Grocery";
 
+
+// Lazy loading also known as:
+// Chunking
+// Code Splitting
+// Dynamic Bundling
+// Lazy Loading
+// On Demand Loading
+// Dynamic Import
+
+//here this import is not same as the above import . this import is a function
+const Grocery = lazy(()=>import("./Grocery"));
 const Title = () => {
   return (
     <a href="/">
@@ -18,11 +32,14 @@ const Title = () => {
 
 const Header = () => {
   const [check, setCheck] = useState(false);
+  const onlineStatus = useOnlineStataus();
+
   return (
     <div className="header">
       <Title />
       <div className="nav-items">
         <ul>
+          <li>Online Status:{onlineStatus ? "🟢" : "🛑"}</li>
           <Link to="/">
             <li>Home</li>
           </Link>
@@ -32,9 +49,11 @@ const Header = () => {
           </Link>
           <Link to="/contact">
             <li>Contact</li>
-          </Link>
-
+          </Link>     
           <li>Cart</li>
+          <Link to="/grocery">
+            <li>Grocery</li>
+          </Link>
         </ul>
       </div>
       {check ? (

@@ -8,6 +8,9 @@ import Error from "./components/Error";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { Suspense } from "react";
+import Grocery from "./components/Grocery";
+import Shimmer from "./components/Shimmer";
 /*
 Header:
   1) logo
@@ -57,6 +60,14 @@ const approuter = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Grocery />
+          </Suspense>
+        ),
       },
     ],
   },

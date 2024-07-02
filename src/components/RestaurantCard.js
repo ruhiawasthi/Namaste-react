@@ -1,4 +1,4 @@
-import { IMG_CDN_URL } from "../contants";
+import { IMG_CDN_URL } from "../utils/contants";
 
 const RestaurantCard = ({
   cloudinaryImageId,

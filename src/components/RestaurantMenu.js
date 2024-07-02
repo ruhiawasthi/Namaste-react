@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 import Shimmer from "./Shimmer";
 
 const RestaurantMenu = () => {
@@ -8,31 +8,34 @@ const RestaurantMenu = () => {
 
   //you can destructure on the fly like this
   const { resId } = useParams();
+  //Created Custome Hook
+  const restaurant = useRestaurantMenu(resId);
 
-  const [restaurant, setRestaurant] = useState(null);
-  useEffect(() => {
-    getRestaurantInfo();
-  }, []);
+  // const [restaurant, setRestaurant] = useState(null);
+  // useEffect(() => {
+  //   getRestaurantInfo();
+  // }, []);
 
-  async function getRestaurantInfo() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9715987&lng=77.5945627&restaurantId=" +
-        resId
-    );
-    const json = await data.json();
-    console.log(json);
-    setRestaurant(json);
-  }
+  // async function getRestaurantInfo() {
+  //   const data = await fetch(
+  //     "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9715987&lng=77.5945627&restaurantId=" +
+  //       resId
+  //   );
+  //   const json = await data.json();
+  //   console.log(json);
+  //   setRestaurant(json);
+  // }
 
   if (restaurant === null) return <Shimmer />;
 
   const { name } = restaurant?.data?.cards[2]?.card?.card?.info;
- 
-  const  {itemCards}  =
-    restaurant?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]
-      .card.card.itemCards ? restaurant?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]
-      .card.card : restaurant?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]
-      .card.card.categories[0];
+
+  const { itemCards } = restaurant?.data?.cards[4]?.groupedCard?.cardGroupMap
+    ?.REGULAR?.cards[3].card.card.itemCards
+    ? restaurant?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]
+        .card.card
+    : restaurant?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]
+        .card.card.categories[0];
 
   console.log(
     "itemCards:",
@@ -45,7 +48,9 @@ const RestaurantMenu = () => {
         <h1>{name} </h1>
         <ul>
           {itemCards.map((item) => (
-            <li key={item.card?.info?.id}>{item.card?.info?.name} - {item.card?.info?.price/100}</li>
+            <li key={item.card?.info?.id}>
+              {item.card?.info?.name} - {item.card?.info?.price / 100}
+            </li>
           ))}
         </ul>
       </div>

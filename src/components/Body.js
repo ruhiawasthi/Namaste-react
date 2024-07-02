@@ -1,8 +1,9 @@
-import { restaurantList } from "../contants";
+import { restaurantList } from "../utils/contants";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStataus from "../utils/useOnlineStatus";
 
 const FilterData = (searchText, restaurants) => {
   const val = restaurants.filter((restaurant) =>
@@ -41,6 +42,9 @@ const Body = () => {
   // if(!allRestaurants) return null;
   // if(filteredRestaurants?.length===0)
   //   return <h1> No record matching</h1>
+  
+ const onlineStatus = useOnlineStataus();
+  if(onlineStatus === false) return <h1>Opps! Looks like you are Offline.</h1>
 
   return allRestaurants?.length === 0 ? (
     <Shimmer />
